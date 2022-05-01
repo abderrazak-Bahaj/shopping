@@ -8174,6 +8174,8 @@ var user = {
      * @param {email:string,password:string,password_confirmation:string} user
      */
     Login: function Login(context, user) {
+      var _this = this;
+
       return new Promise(function (resolve, reject) {
         axios.post('/api/user/login', user).then(function (response) {
           if (response.status == 200) {
@@ -8184,7 +8186,7 @@ var user = {
               context.dispatch('getCardsUser');
               context.dispatch('getCartsUser');
               context.dispatch('getFavorites');
-              resolve(true);
+              if (_this.getters['userIsAdmin']) resolve(true);else resolve(false);
             } else {
               resolve({
                 token: response.data.access_Token
@@ -8219,10 +8221,10 @@ var user = {
      * @param  non
      */
     logoutUser: function logoutUser(context) {
-      var _this = this;
+      var _this2 = this;
 
       return new Promise(function (resolve, reject) {
-        var token = _this.getters["userToken"];
+        var token = _this2.getters["userToken"];
         context.commit('LOGOUT_USER');
         context.dispatch('DeleteAllCarts');
         context.dispatch('DeleteAllCards');
@@ -8346,7 +8348,7 @@ var user = {
      * @param {page:number} page
      */
     getUsers: function getUsers(context) {
-      var _this2 = this;
+      var _this3 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
         var userToken, headers;
@@ -8354,7 +8356,7 @@ var user = {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                userToken = _this2.getters['userToken'];
+                userToken = _this3.getters['userToken'];
                 headers = {
                   'Authorization': "Bearer ".concat(userToken)
                 };
@@ -8407,7 +8409,7 @@ var user = {
      * @param {id:number,password:string} user
      */
     deleteUser: function deleteUser(context, user) {
-      var _this3 = this;
+      var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
         var userToken, headers;
@@ -8415,7 +8417,7 @@ var user = {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                userToken = _this3.getters['userToken'];
+                userToken = _this4.getters['userToken'];
                 headers = {
                   'Authorization': "Bearer ".concat(userToken)
                 };
@@ -8446,7 +8448,7 @@ var user = {
     },
     // Count Product
     CountUser: function CountUser(context) {
-      var _this4 = this;
+      var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
         var userToken, headers;
@@ -8454,7 +8456,7 @@ var user = {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                userToken = _this4.getters['userToken'];
+                userToken = _this5.getters['userToken'];
                 headers = {
                   'Authorization': "Bearer ".concat(userToken)
                 };

@@ -54,8 +54,12 @@ export default {
       await this.$store.dispatch('Login',this.user)
                 .then(response => {
                   if(response == true){
+                    this.$router.push('/dashboard')
+                  }
+                  if(response == false){
                     this.$router.push('/')
                   }
+
                   else{
                     this.$router.push(`/email/resend/${response.token}`)
                   }

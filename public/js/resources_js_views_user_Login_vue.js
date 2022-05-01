@@ -96,6 +96,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context.next = 3;
                 return _this.$store.dispatch('Login', _this.user).then(function (response) {
                   if (response == true) {
+                    _this.$router.push('/dashboard');
+                  }
+
+                  if (response == false) {
                     _this.$router.push('/');
                   } else {
                     _this.$router.push("/email/resend/".concat(response.token));

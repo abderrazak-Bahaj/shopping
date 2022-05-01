@@ -49,7 +49,11 @@ const user = {
                                 context.dispatch('getCardsUser')
                                 context.dispatch('getCartsUser')
                                 context.dispatch('getFavorites')
-                                resolve(true)
+
+                                if(this.getters['userIsAdmin'])
+                                    resolve(true)
+                                else
+                                    resolve(false)
                             }
                             else {
                                 resolve({ token: response.data.access_Token })
