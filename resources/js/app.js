@@ -35,5 +35,6 @@ else
   }).catch( err =>{
   /// if Token expected or server not work
   }).finally(()=>{
+    
     new Vue({router,store,render: h => h(App)}).$mount("#app")
   })

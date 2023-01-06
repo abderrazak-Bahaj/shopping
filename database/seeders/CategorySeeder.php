@@ -67,7 +67,7 @@ class CategorySeeder extends Seeder
     DB::table('categories')->insert([
         [
             'cat_name' => 'Phone',
-            'cat_img' => 'category-img/phone.jpg',
+            'cat_img' => 'category-img/phone.webp',
             'created_at'=> Carbon::now(),
             'updated_at'=>  Carbon::now(),
         ],
@@ -79,33 +79,33 @@ class CategorySeeder extends Seeder
         ],
         [
             'cat_name' => 'Perfume',
-            'cat_img' => 'category-img/Perfume.jpg',
+            'cat_img' => 'category-img/Perfume.webp',
             'created_at'=> Carbon::now(),
             'updated_at'=>  Carbon::now(),
         ],[
             'cat_name' => 'Shoes',
-            'cat_img' => 'category-img/shose.jpg',
+            'cat_img' => 'category-img/shose.webp',
             'created_at'=> Carbon::now(),
             'updated_at'=>  Carbon::now(),
         ],[
             'cat_name' => 'Camera',
-            'cat_img' => 'category-img/camera.jpg',
+            'cat_img' => 'category-img/camera.webp',
             'created_at'=> Carbon::now(),
             'updated_at'=>  Carbon::now(),
         ],[
             'cat_name' => 'Watch',
-            'cat_img' => 'category-img/watch.jpg',
+            'cat_img' => 'category-img/watch.webp',
             'created_at'=> Carbon::now(),
             'updated_at'=>  Carbon::now(),
         ],[
             'cat_name' => 'Back bag',
-            'cat_img' => 'category-img/backbag.jpg',
+            'cat_img' => 'category-img/backbag.webp',
             'created_at'=> Carbon::now(),
             'updated_at'=>  Carbon::now(),
         ],
         [
             'cat_name' => 'Headphones',
-            'cat_img' => 'category-img/Headphones.jpg',
+            'cat_img' => 'category-img/Headphones.webp',
             'created_at'=> Carbon::now(),
             'updated_at'=>  Carbon::now(),
         ]

@@ -147,7 +147,7 @@ const routes = [
       {
         path: '/edit-password',
         name: 'AdminEditPassword',
-        component: () => import('../views/user/editPassword.vue'),
+        component: () => import('../views/user/EditPassword.vue'),
       },
       {
         path: '/edit-profile',
@@ -174,7 +174,7 @@ const routes = [
       {
         path: '/users',
         name: 'UserGrey',
-        component: () => import("../views/Admin/listUser.vue"),
+        component: () => import("../views/Admin/ListUser.vue"),
       },
       {
         path: '/product/add',
@@ -189,7 +189,7 @@ const routes = [
       {
         path: '/product',
         name: 'Product',
-        component: () => import("../views/Admin/product.vue"),
+        component: () => import("../views/Admin/Product.vue"),
       },
       
     ]
@@ -224,7 +224,7 @@ const routes = [
       {
         path: '/editpassword',
         name: 'EditPassword',
-        component: () => import('../views/user/editPassword.vue'),
+        component: () => import('../views/user/EditPassword.vue'),
         beforeEnter: redirectIfAdmin
       },
       //#endregion

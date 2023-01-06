@@ -28,7 +28,7 @@ class CreateOrdersTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
-        DB::statement("ALTER TABLE orders ADD CONSTRAINT chk_state_orders CHECK (State in(N'success',N'reversion',N'in delivery'))");
+        ///DB::statement("ALTER TABLE orders ADD CONSTRAINT chk_state_orders CHECK (State in(N'success',N'reversion',N'in delivery'))");
     }
 
     /**

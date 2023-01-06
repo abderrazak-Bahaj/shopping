@@ -10,6 +10,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RateController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\VerificationController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,14 @@ Route::post('/user/reset-password',[ResetPasswordController::class,'reset']);
 Route::controller(VerificationController::class)->group(function(){
     Route::get('/email/verify/{id}/{hash}','verify')->name('verification.verify');
     Route::post('/email/resend','resend')->name('verification.resend');
+});
+#endregion
+
+
+#region Verification Routes
+Route::controller(ContactController::class)->group(function(){
+    Route::get('/contact','index')->name('index');
+    Route::post('/contact','store');
 });
 #endregion
 
