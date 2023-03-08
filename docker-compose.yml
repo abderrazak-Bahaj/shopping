@@ -1,10 +1,39 @@
 version: '3'
+
 services:
   app:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: my_laravel_app
+    restart: unless-stopped
     ports:
       - "8000:80"
+    environment:
+      MYSQL_DATABASE: my_database
+      MYSQL_ROOT_PASSWORD: my_password
     volumes:
-      - .:/var/www/html
+      - ./:/var/www/html
+    networks:
+      - my_network
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    container_name: my_mysql_database
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: my_database
+      MYSQL_ROOT_PASSWORD: my_password
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - my_network
+
+volumes:
+  db_data:
+
+networks:
+  my_network:
+    driver: bridge

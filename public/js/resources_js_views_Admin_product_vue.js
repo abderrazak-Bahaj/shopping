@@ -211,13 +211,13 @@ var render = function render() {
       attrs: {
         scope: "row"
       }
-    }, [_vm._v(" " + _vm._s(product.id))]), _vm._v(" "), _c("th", [_c("img", {
+    }, [_vm._v(" " + _vm._s(product.id))]), _vm._v(" "), _c("th", [product.p_image_1 ? _c("img", {
       staticClass: "cls-img-product",
       attrs: {
-        src: product.p_image_1,
+        src: product === null || product === void 0 ? void 0 : product.p_image_1,
         alt: "img"
       }
-    })]), _vm._v(" "), _c("th", [_vm._v(" " + _vm._s(product.p_name))]), _vm._v(" "), _c("td", [_c("router-link", {
+    }) : _vm._e()]), _vm._v(" "), _c("th", [_vm._v(" " + _vm._s(product.p_name))]), _vm._v(" "), _c("td", [_c("router-link", {
       staticClass: "link-secondary",
       attrs: {
         to: "/category"
