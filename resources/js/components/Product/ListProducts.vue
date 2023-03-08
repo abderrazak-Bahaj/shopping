@@ -14,7 +14,7 @@
             <tbody>
                 <tr v-for="product in getAllProducts" :key="product.id" >
                 <th scope="row"> {{product.id}}</th>
-                <th > <img :src="product.p_image_1" alt="img" class="cls-img-product"></th>
+                <th > <img :src="product?.p_image_1" alt="img" class="cls-img-product" v-if="product.p_image_1"></th>
                 <th > {{product.p_name}}</th>
                 <td >
                     <router-link to='/category' class="link-secondary">

@@ -1,36 +1,29 @@
 FROM php:8.1-apache
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    libicu-dev \
-    libzip-dev \
-    zip \
-    unzip \
-    && docker-php-ext-install intl pdo_mysql zip \
-    && pecl install xdebug \
-    && docker-php-ext-enable xdebug
+
+# Install required PHP extensions
+RUN docker-php-ext-install pdo_mysql
+RUN apt-get update && apt-get install -y libzip-dev zip && docker-php-ext-install zip
+
+# Enable Apache Rewrite Module
+RUN a2enmod rewrite
 
 # Install Composer
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Set working directory
+# Copy the code to the container
+COPY . /var/www/html
+
+# Set the working directory
 WORKDIR /var/www/html
 
-# Copy application files
-COPY . .
-
-# Set permissions
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-
-# Install application dependencies
-RUN composer install
-
-# Set up Apache
-COPY docker/apache.conf /etc/apache2/sites-available/000-default.conf
-RUN a2enmod rewrite
-RUN service apache2 restart
-
-# Expose port 80
+# Expose port 80 for Apache
 EXPOSE 80
 
-# Run the command to start Apache
-CMD ["apache2-foreground"]
+# Copy virtual host file
+COPY docker/vhost.conf /etc/apache2/sites-available/000-default.conf
+
+# Run migrations
+RUN composer install && php artisan migrate
+
+# Start Apache
+CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]

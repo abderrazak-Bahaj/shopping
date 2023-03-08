@@ -1,7 +1,6 @@
 require('./bootstrap');
 
 window.Vue = require('vue').default;
-
 import App from './App.vue'
 import VueRouter from 'vue-router'
 import axios from 'axios'
@@ -10,7 +9,10 @@ import router from './router';
 import store from './store'; 
 import Vue from 'vue';
 import helpers from './helpers'
+axios.defaults.baseURL = "https://shopeapp.alwaysdata.net";
+window.Vue.publicPath = "https://shopeapp.alwaysdata.net";
 
+//change base url to vue config file
 const plugin = {
   install () {
     Vue.helpers = helpers

@@ -5993,6 +5993,7 @@ window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js
 
 
 
+(axios__WEBPACK_IMPORTED_MODULE_1___default().defaults.baseURL) = "https://shopeapp.alwaysdata.net";
 var plugin = {
   install: function install() {
     vue__WEBPACK_IMPORTED_MODULE_6__["default"].helpers = _helpers__WEBPACK_IMPORTED_MODULE_5__["default"];
