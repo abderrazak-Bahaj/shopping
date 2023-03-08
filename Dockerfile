@@ -23,7 +23,7 @@ EXPOSE 80
 COPY docker/vhost.conf /etc/apache2/sites-available/000-default.conf
 
 # Run migrations
-RUN composer install && php artisan migrate
+RUN composer install
 
 # Start Apache
 CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
