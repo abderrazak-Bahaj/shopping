@@ -9,7 +9,7 @@ services:
     container_name: shopping_app_prod
     restart: unless-stopped
     ports:
-      - "80:80"
+      - "8080:82"
     environment:
       - DB_CONNECTION=${DB_CONNECTION}
       - DB_HOST=mysql
@@ -43,6 +43,8 @@ services:
     image: mysql:8.0
     container_name: shopping_mysql_prod
     restart: unless-stopped
+    ports:
+      - "3307:3306"
     environment:
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
@@ -64,22 +66,6 @@ services:
     networks:
       - shopping_network
 
-  # Nginx Reverse Proxy
-  nginx:
-    image: nginx:alpine
-    container_name: shopping_nginx_prod
-    restart: unless-stopped
-    ports:
-      - "443:443"
-      - "80:80"
-    volumes:
-      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./docker/nginx/ssl:/etc/nginx/ssl
-      - ./public:/var/www/html/public
-    depends_on:
-      - app
-    networks:
-      - shopping_network
 
 volumes:
   mysql_data_prod:
