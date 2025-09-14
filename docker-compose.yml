@@ -1,10 +1,102 @@
-version: '3'
+
+
 services:
+  # Laravel Application
   app:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: shopping_app
+    restart: unless-stopped
     ports:
       - "8000:80"
     volumes:
       - .:/var/www/html
+      - ./docker/php.ini:/usr/local/etc/php/conf.d/local.ini
+    environment:
+      - DB_CONNECTION=${DB_CONNECTION}
+      - DB_HOST=mysql
+      - DB_PORT=${DB_PORT}
+      - DB_DATABASE=${DB_DATABASE}
+      - DB_USERNAME=${DB_USERNAME}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - MAIL_MAILER=${MAIL_MAILER}
+      - MAIL_HOST=mailpit
+      - MAIL_PORT=${MAIL_PORT}
+      - MAIL_USERNAME=${MAIL_USERNAME}
+      - MAIL_PASSWORD=${MAIL_PASSWORD}
+      - MAIL_ENCRYPTION=${MAIL_ENCRYPTION}
+      - MAIL_FROM_ADDRESS=${MAIL_FROM_ADDRESS}
+      - MAIL_FROM_NAME=${MAIL_FROM_NAME}
+      - APP_NAME=${APP_NAME}
+      - APP_ENV=${APP_ENV}
+      - APP_KEY=${APP_KEY}
+      - APP_DEBUG=${APP_DEBUG}
+      - APP_URL=${APP_URL}
+    depends_on:
+      - mysql
+      - redis
+    networks:
+      - shopping_network
+
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: shopping_mysql
+    restart: unless-stopped
+    ports:
+      - "${DB_PORT}:3306"
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - shopping_network
+
+  # Redis for Caching
+  redis:
+    image: redis:7-alpine
+    container_name: shopping_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - shopping_network
+
+  # Mailpit for Email Testing
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: shopping_mailpit
+    restart: unless-stopped
+    ports:
+      - "8025:8025"
+      - "${MAIL_PORT}:1025"
+    networks:
+      - shopping_network
+
+  # Node.js for Asset Compilation (Development)
+  node:
+    image: node:18-alpine
+    container_name: shopping_node
+    working_dir: /var/www/html
+    volumes:
+      - .:/var/www/html
+    command: sh -c "npm install && tail -f /dev/null"
+    networks:
+      - shopping_network
+
+volumes:
+  mysql_data:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  shopping_network:
+    driver: bridge

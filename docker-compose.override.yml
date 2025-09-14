@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  app:
+    environment:
+      - APP_DEBUG=true
+      - XDEBUG_MODE=develop,debug
+    volumes:
+      - .:/var/www/html
+      - ./docker/php.ini:/usr/local/etc/php/conf.d/local.ini
+      - ./docker/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+
+  mysql:
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    command: --default-authentication-plugin=mysql_native_password
+
+  # Development tools
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: shopping_phpmyadmin
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: password
+    depends_on:
+      - mysql
+    networks:
+      - shopping_network 
