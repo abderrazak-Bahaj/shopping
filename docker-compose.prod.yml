@@ -9,7 +9,7 @@ services:
     container_name: shopping_app_prod
     restart: unless-stopped
     ports:
-      - "8080:82"
+      - "8082:82"  # host port 8082 -> container port 82
     environment:
       - DB_CONNECTION=${DB_CONNECTION}
       - DB_HOST=mysql
@@ -44,7 +44,7 @@ services:
     container_name: shopping_mysql_prod
     restart: unless-stopped
     ports:
-      - "3307:3306"
+      - "3308:3306"  
     environment:
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
@@ -61,11 +61,12 @@ services:
     image: redis:7-alpine
     container_name: shopping_redis_prod
     restart: unless-stopped
+    ports:
+      - "6380:6379"  # host port 6380 -> container 6379
     volumes:
       - redis_data_prod:/data
     networks:
       - shopping_network
-
 
 volumes:
   mysql_data_prod:
@@ -75,4 +76,4 @@ volumes:
 
 networks:
   shopping_network:
-    driver: bridge 
+    driver: bridge
