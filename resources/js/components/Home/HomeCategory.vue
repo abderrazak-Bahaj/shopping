@@ -13,7 +13,7 @@
     </div>
     <div class="row">
       <div
-        class="col-12 col-md-4 p-5 mt-3 text-center wow fadeInUp"
+        class="col-12 col-md-4 p-5 mt-3 text-center wow fadeInUp flex"
         data-wow-delay="0.5"
         data-wow-duration="1s"
         v-for="category in getAllCategorais.slice(0, 3)"
@@ -43,6 +43,11 @@ export default {
 </script>
 
 <style>
+.flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .cls-imgs-category {
   width: 13em;
   height: 13em;

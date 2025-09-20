@@ -1,23 +1,20 @@
 <template>
-    <div>   
-            <home-header/>
-            <home-category />
-            <features-products/>
-    </div>
+  <div>
+    <home-header />
+
+    <home-category />
+    <features-products />
+  </div>
 </template>
 
 <script>
-import FeaturesProducts from '../../components/Home/FeaturesProducts.vue'
-import HomeCategory from '../../components/Home/HomeCategory.vue'
-import HomeHeader from '../../components/Home/HomeHeader.vue'
+import FeaturesProducts from "../../components/Home/FeaturesProducts.vue";
+import HomeCategory from "../../components/Home/HomeCategory.vue";
+import HomeHeader from "../../components/Home/HomeHeader.vue";
 export default {
-  data:()=>({
-  }),
+  data: () => ({}),
   components: { FeaturesProducts, HomeHeader, HomeCategory },
-  async created(){
-  },
-}
+  async created() {},
+};
 </script>
-<style>
-
-</style>
+<style></style>
