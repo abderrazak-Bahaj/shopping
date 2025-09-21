@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # Laravel Application
   app:
@@ -44,12 +42,10 @@ services:
     container_name: shopping_mysql_prod
     restart: unless-stopped
     ports:
-      - "3308:3306"  
+      - "3308:3306"
     environment:
       MYSQL_DATABASE: ${DB_DATABASE}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      MYSQL_USER: ${DB_USERNAME}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
     volumes:
       - mysql_data_prod:/var/lib/mysql
       - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
