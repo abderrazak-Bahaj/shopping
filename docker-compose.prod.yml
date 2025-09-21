@@ -7,7 +7,7 @@ services:
     container_name: shopping_app_prod
     restart: unless-stopped
     ports:
-      - "8082:82"  # host port 8082 -> container port 82
+      - "8082:80"  # host port 8082 -> container port 82
     environment:
       - DB_CONNECTION=${DB_CONNECTION}
       - DB_HOST=mysql
